@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { motion } from "framer-motion";
 import { AddressFormProps } from "@/lib/types";
-import { SalaryOptions } from "@/lib/data";
+import { SalaryOptions } from "../lib/data";
 
 const SalaryIndication: FC<AddressFormProps> = ({
   register,
