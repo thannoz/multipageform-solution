@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { FormDataSchema } from "@/lib/schema";
+import { FormDataSchema } from "../lib/schema";
 import ProgressIndicator from "./ProgressIndicator";
 
-import { Steps } from "@/lib/data";
+import { Steps } from "../lib/data";
 import PersonalInformation from "./PersonalInfo";
 import StepButtons from "./StepButtons";
 import SalaryIndication from "./SalaryIndication";
@@ -84,6 +84,7 @@ export default function MultiPageForm() {
               register={register}
               errors={errors}
               delta={delta}
+              data-testid="personal-info-component"
             />
           )}
           {/* SalaryIndication */}

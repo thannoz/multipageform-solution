@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import { it, expect, describe, vitest } from "vitest";
+import { it, expect, describe } from "vitest";
 import { FieldErrors } from "react-hook-form";
 import { vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
@@ -11,6 +11,7 @@ import { Inputs } from "@/lib/schema";
 
 describe("SalaryIndication component", () => {
   const mockRegister = vi.fn();
+
   it("should render correctly", () => {
     const { getByText, getAllByRole } = render(
       <SalaryIndication register={mockRegister} errors={{}} delta={0} />
