@@ -8,7 +8,7 @@ interface StepNavigationProps {
 
 const ProgressIndicator: FC<StepNavigationProps> = ({ steps, currentStep }) => {
   return (
-    <ol className="flex w-full items-center space-x-2 rounded-lg border border-gray-200 bg-white p-3 text-center text-sm font-medium text-gray-500 shadow-sm">
+    <ol className="flex w-full items-center space-x-2 rounded-lg border border-gray-200 bg-white p-2 text-center text-sm font-medium text-gray-500 shadow-sm">
       {steps.map((step, index) => (
         <li key={step.name} className="md:flex-1">
           {currentStep > index ? (
