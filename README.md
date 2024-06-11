@@ -32,6 +32,8 @@ This project is a multi-page form built with Next.js, TypeScript, and Tailwind C
 
 ## Testing
 
+Open a new terminal window and type
+
 ```bash
  npm run test:ui
 ```
