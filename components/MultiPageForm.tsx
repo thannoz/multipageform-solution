@@ -11,6 +11,7 @@ import ProgressIndicator from "./ProgressIndicator";
 import { Steps } from "@/lib/data";
 import PersonalInformation from "./PersonalInfo";
 import StepButtons from "./StepButtons";
+import SalaryIndication from "./SalaryIndication";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -82,6 +83,13 @@ export default function MultiPageForm() {
             />
           )}
           {/* SalaryIndication */}
+          {currentStep === 1 && (
+            <SalaryIndication
+              register={register}
+              errors={errors}
+              delta={delta}
+            />
+          )}
 
           {/* Complete */}
         </form>
