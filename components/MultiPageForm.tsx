@@ -9,6 +9,8 @@ import { FormDataSchema } from "@/lib/schema";
 import ProgressIndicator from "./ProgressIndicator";
 
 import { Steps } from "@/lib/data";
+import PersonalInformation from "./PersonalInfo";
+import StepButtons from "./StepButtons";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -28,12 +30,33 @@ export default function MultiPageForm() {
 
   const [formData, setFormData] = useState<Inputs | null>(null);
 
-  const processForm: SubmitHandler<Inputs> = (data) => {
-    setFormData(data);
-    console.log(data);
-  };
+  const processForm: SubmitHandler<Inputs> = (data) => {};
 
   type FieldName = keyof Inputs;
+
+  const next = async () => {
+    const fields = Steps[currentStep].fields;
+    const output = await trigger(fields as FieldName[], {
+      shouldFocus: true,
+    });
+
+    if (!output) return;
+
+    if (currentStep < Steps.length - 1) {
+      if (currentStep === Steps.length - 2) {
+        await handleSubmit(processForm)();
+      }
+      setPreviousStep(currentStep);
+      setCurrentStep((step) => step + 1);
+    }
+  };
+
+  const prev = () => {
+    if (currentStep > 0) {
+      setPreviousStep(currentStep);
+      setCurrentStep((step) => step - 1);
+    }
+  };
 
   return (
     <section className="flex min-h-screen flex-col items-center justify-center bg-gray-200 font-sans">
@@ -51,13 +74,25 @@ export default function MultiPageForm() {
       <div className="mt-5 w-full max-w-lg rounded-lg bg-gray-300 p-8 shadow-lg">
         <form className="mt-6 py-6" onSubmit={handleSubmit(processForm)}>
           {/* PersonalInfomation */}
-
+          {currentStep === 0 && (
+            <PersonalInformation
+              register={register}
+              errors={errors}
+              delta={delta}
+            />
+          )}
           {/* SalaryIndication */}
 
           {/* Complete */}
         </form>
 
         {/* Next and Prev buttons */}
+        <StepButtons
+          prev={prev}
+          next={next}
+          currentStep={currentStep}
+          totalSteps={Steps.length}
+        />
       </div>
     </section>
   );
